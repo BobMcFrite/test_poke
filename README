@@ -1,0 +1,21 @@
+Before using this project you need to :
+
+Install node.js
+
+Go to the TEST_POKE folder and go to command CMD
+
+Install express (npm install express)
+
+Install axios (npm install axios)
+
+Launch the project (node app.js)
+
+URL is : http://localhost:3000/pokemon?name=pikachu
+
+if u want to have information on a pokemon, add ?name="pokemonName"
+
+example : http://localhost:3000/pokemon?name=pikachu
+
+
+
+
