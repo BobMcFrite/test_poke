@@ -1,17 +1,17 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const PORT = 3000
 const axios = require('axios')
 
-// Configuration de GET pour récupérer les informations sur l'API
-app.get('/pokemon', (req, res) => {
+// Configuration de la route GET pour récupérer les informations sur le Pokémon
+app.get('/pokemon', async (req, res) => {
     try {
         const pokemonName = req.query.name;
         if (!pokemonName) {
             return res.status(400).send('Le paramètre "name" est requis.');
         }
 
-        const pokemonInfo = getPokemonInfo(pokemonName);
+        const pokemonInfo = await getPokemonInfo(pokemonName);
         res.json(pokemonInfo);
     } catch (error) {
         res.status(500).send(error.message);
@@ -25,8 +25,8 @@ async function getPokemonInfo(pokemonName) {
         const pokemonInfo = {
             name,
             id,
-            types,
-            abilities
+            types: types.map(type => type.type.name),
+            abilities: abilities.map(ability => ability.ability.name)
         };
         return pokemonInfo;
     } catch (error) {
@@ -38,7 +38,7 @@ async function getPokemonInfo(pokemonName) {
     }
 }
 
-// server start
-app.listen(port, () => {
-    console.log(`Serveur Express en cours d'exécution sur le port ${port}`);
+// Démarrage du serveur
+app.listen(PORT, () => {
+    console.log(`Serveur Express en cours d'exécution sur le port ${PORT}`);
 });
